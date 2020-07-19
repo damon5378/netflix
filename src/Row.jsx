@@ -20,7 +20,6 @@ export const Row = (props) => {
         // if [], run once when the row loads and don't run again
     }, [props.fetchURL]);
 
-    console.table(movies);
 
   return (
     <div className="row">
@@ -30,9 +29,10 @@ export const Row = (props) => {
       <div className="row__posters">
         {movies.map( movie => (
             <img 
-                src={`${baseURL}${movie.poster_path}`} 
+                key={movie.id}
+                src={`${baseURL}${props.isLargeRow ? movie.poster_path : movie.backdrop_path}`} 
                 alt={movie.name}
-                className="row__poster"/>
+                className={`row__poster ${props.isLargeRow && "row__posterLarge"}`}/>
         ))}
       </div>
     </div>
